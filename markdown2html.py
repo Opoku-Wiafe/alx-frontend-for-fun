@@ -1,38 +1,52 @@
 #!/usr/bin/python3
 """
-This script converts a Markdown file to HTML.
+A script that convert a Markdown file to HTML.
 
 Usage:
-    ./markdown2html.py [input_file] [output_file]
+    ./markdown2html.py [markdown_file] [output_file]
 
 Arguments:
-    input_file: The name of the Markdown file to be converted.
-    output_file: The name of the output HTML file.
+    markdown_file: the name of the Markdown file to be converted
+    output_file: the name of the output HTML file
 """
 
+import argparse
+import pathlib
+import re
 import sys
-import os
-import markdown
 
-def convert_markdown_to_html(markd_file, output_file):
+
+def convert_markdown_to_html(markdown_file, output_file):
     """
-    Converts a markdown file to an HTML file.
-
-    Args:
-        markd_file: The markdown file to convert.
-        output_file: The destination HTML file.
+    Converts markdown file to HTML file
     """
-    pass  # Placeholder for the function's implementation
+    with open(markdown_file, encoding='utf-8') as f:
+        markd_content = f.readlines()
 
-if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")
+    html_content = []
+    for line in markd_content:
+        match = re.match(r'(#){1,6} (.*)', line)
+        if match:
+            h_level = len(match.group(1))
+            h_content = match.group(2)
+            html_content.append(f'<h{h_level}>{h_content}</h{h_level}>\n')
+        else:
+            html_content.append(line)
+
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.writelines(html_content)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Convert markdown to HTML')
+    parser.add_argument('input_file', help='path to input markdown file')
+    parser.add_argument('output_file', help='path to output HTML file')
+    args = parser.parse_args()
+
+    input_path = pathlib.Path(args.input_file)
+    if not input_path.is_file():
+        print(f'Missing {input_path}', file=sys.stderr)
         sys.exit(1)
 
-    input_file, output_file = sys.argv[1], sys.argv[2]
-
-    if not os.path.isfile(input_file):
-        sys.stderr.write(f"Missing {input_file}\n")
-        sys.exit(1)
-
-    convert_markdown_to_html(input_file, output_file)
+    # Convert the markdown file to HTML
+    convert_markdown_to_html(args.input_file, args.output_file)
