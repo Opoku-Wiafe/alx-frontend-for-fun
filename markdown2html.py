@@ -1,25 +1,26 @@
 #!/usr/bin/python3
 """
-A script markdown that convert script to HTML
+A script that converts a Markdown file to HTML.
+
 Usage:
     ./markdown2html.py [markdown_file] [output_file]
-markdown_file: Name of the file to be converted.
-output_file: The Name of the converted html file.
+
+Arguments:
+    markdown_file: Name of the file to be converted.
+    output_file: Name of the converted HTML file.
 """
 
 import sys
 import os
 import markdown
 
-
 def main():
     """
-    a script markdown2html.py that takes an argument 2 strings
+    A script markdown2html.py that takes two arguments: a markdown file name
+    and an HTML file name for output.
     """
-    error_msg = "Usage: ./markdown2html.py README.md README.html"
-
     if len(sys.argv) != 3:
-        print(error_msg, file=sys.stderr)
+        print("Usage: ./markdown2html.py README.md README.html", file=sys.stderr)
         sys.exit(1)
 
     markdown_fname = sys.argv[1]
@@ -38,7 +39,6 @@ def main():
         html_file.write(html_content)
 
     sys.exit(0)
-
 
 if __name__ == "__main__":
     main()
