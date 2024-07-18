@@ -1,0 +1,60 @@
+/* The slider */
+.toggle-label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 20px;
+    background-color: #EBEBEB;
+    border: #C3C3C3 1px solid;
+    border-radius: 20px;
+}
+
+/* after slide effect */
+.toggle-label::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: white;
+    top: -4px;
+    left: -1px;
+    transition: all 0.3s;
+    border: lightgray 1px solid;
+}
+
+/* inside the slider */
+.toggle-inner {
+    font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size: 0.9rem;
+}
+
+/* Content inside Toggle */
+.toggle-inner::before {
+    content: "Yes";
+    color: white;
+    padding-left: 6px;
+}
+
+.toggle-inner::after::before {
+    color: #C3C3C3;
+}
+
+.toggle-inner::after {
+    content: "No";
+    color: #C3C3C3;
+    padding-left: 6px;
+}
+
+.toggle-cb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.toggle-cb:checked + .toggle-label::after {
+  left: 33px;
+}
+
+.toggle-cb:checked + .toggle-label {
+  background-color: #d73953;
+}
