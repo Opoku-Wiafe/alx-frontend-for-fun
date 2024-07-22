@@ -1,0 +1,14 @@
+/* write a sass file that performs a mixin */
+
+@mixin cos_margin ($value) {
+    margin-left: $value;
+    margin-right: $value;
+}
+
+body {
+    @include cos_margin(10px);
+}
+
+div {
+    @include cos_margin(15px);
+}

@@ -1,0 +1,17 @@
+/* Changing colors for background and text */
+
+$var_color: #3D3D3D;
+$bk_color: #6D6D6D;
+
+body {
+    color: $var_color;
+    background-color: $bk_color;
+}
+
+p {
+    color: $var_color;
+}
+
+h2 {
+    background-color: $bk_color;
+}

@@ -1,0 +1,11 @@
+/* changing colors in SASS */
+
+$var_color : #3D3D3D;
+
+body {
+    color: $var_color;
+}
+
+p {
+    color: $var_color;
+}
